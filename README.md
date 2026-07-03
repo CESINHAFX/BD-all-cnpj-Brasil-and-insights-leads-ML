@@ -1,0 +1,2 @@
+# BD-all-cnpj-Brasil-and-insights-leads-ML
+Lida com api Brasil,dados do gov,api google maps,rede social.... cria tabelas ORM em python, acha as relações, e executa um machine learning para responder perguntas de interesse da empresa
