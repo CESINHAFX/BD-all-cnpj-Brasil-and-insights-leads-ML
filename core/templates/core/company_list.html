@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Empresas</title>
+</head>
+<body>
+    <h1>Empresas: {{ companies.count }}</h1>
+    <ul>
+    {% for company in companies %}
+        <li>{{ company.legal_name }} - {{ company.cnpj }} - {{ company.city }}/{{ company.state }}</li>
+    {% empty %}
+        <p>No companies found.</p>
+    {% endfor %}
+    </ul>
+</body>
+</html>

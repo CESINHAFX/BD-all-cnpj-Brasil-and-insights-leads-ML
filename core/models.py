@@ -37,3 +37,18 @@ class CNAE(models.Model):
 
     def __str__(self):
         return f"{self.code} - {self.description}"
+
+class Partner(models.Model):
+
+    Classification_choices = [
+        ("22", 'Socio'),
+        ("49", 'Socio-Administrador'),
+    ]
+    name = models.CharField(max_length=255)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='partners')
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    qualification_code = models.CharField(max_length=2, choices=Classification_choices)
+
+    def __str__(self):
+        return f"{self.name} - {self.company.legal_name}"
