@@ -15,8 +15,8 @@ class Company(models.Model):
     cnae_main = models.ForeignKey('CNAE', on_delete=models.PROTECT, blank=True, null=True,related_name='companies_main')
     cnae_secondary = models.ManyToManyField('CNAE', related_name='companies_secondary', blank=True)
     address = models.TextField()
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=2)
+    city = models.CharField(max_length=100, db_index=True)
+    state = models.CharField(max_length=2, db_index=True)
     zip_code = models.CharField(max_length=10)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
@@ -52,3 +52,5 @@ class Partner(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.company.legal_name}"
+    
+    
