@@ -1,16 +1,19 @@
+import zipfile
+
 from core.models import Company
 import csv
+from decimal import Decimal
 from django.db import transaction
 companies = []
 total = 0
-for row in csv.DictReader(open('core/management/commands/cnpj.csv')):
+for row in zipfile.ZipeFile.(open('/home/arch/Downloads/BD-all-cnpj-Brasil-and-insights-leads-ML/data/cnpj/2026-01/Cnaes.zip')):
     company = Company(
         cnpj=row['cnpj'],
         legal_name=row['razao_social'],
         trade_name=row['nome_fantasia'],
         date_opened=row['data_abertura'] if row['data_abertura'] else None,
         registration_status=row['situacao_cadastral'],
-        capital_social=row['capital_social'] if row['capital_social'] else None,
+        capital_social=Decimal(row['capital_social'].replace(',', '.')) if row['capital_social'] else None,
         legal_nature_code=row['codigo_natureza_juridica'],
         address=row['logradouro'],
         city=row['municipio'],

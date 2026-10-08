@@ -1,0 +1,46 @@
+{
+  "phase1": {
+    "project_name": "BD-all-cnpj-Brasil-and-insights-leads-ML",
+    "project_purpose": "Publichttps://github.com/CESINHAFX/BD-all-cnpj-Brasil-and-insights-leads-ML.git",
+    "target_users": "Empresarios",
+    "main_features": "Captura de leads filtrando apartir de um big data no sql do brasil para responder perguntas de interese do empresario como:quais leads se qualificam pra aquele tipo de empresa, se tem capital, quanto tempo tem dentro do mercado atuando",
+    "success_criteria": "leads quentes(convertidos em compradores reais e mantidos a longo prazo)",
+    "business_rules": "ainda n sei"
+  },
+  "phase2": {
+    "architecture_type": "ainda n sei",
+    "tech_stack": "django orm,python,sql,non-sql,...",
+    "database_type": "sql e non-sql",
+    "data_model": "ainda n sei",
+    "security_requirements": "dentro do django ja tem etapas que cuidam da seguranca contra XSS,SQL INJECTION,AUTENTICAÇÃO DE LOGIN...",
+    "scalability_needs": "ao usar Non-sql e organizar com ORM para encontrar relações entre varias estruturas de dados para usar como insiths em machine learning para responder perguntas de enteresse da empresa"
+  },
+  "phase3": {
+    "coding_standards": "deve respeitar o pyeslint e diretrizes do PEP 8",
+    "dependencies": "ainda n sei",
+    "version_control": "ainda n sei",
+    "secret_management": "talves o gitignore resolva isso",
+    "documentation_approach": "ainda n sei"
+  },
+  "phase4": {
+    "test_types": "o django ja define os tipos de testes que serao implementados",
+    "test_framework": "django",
+    "coverage_target": "ainda n sei",
+    "ci_tool": "ainda n sei",
+    "test_environment": "pode ser feito com docker para que consiga rodar em qualquer tipo de maquina"
+  },
+  "phase5": {
+    "hosting_platform": "ainda n sei",
+    "deployment_strategy": "sera usado runserver do django com makemigrations e migrate",
+    "cd_pipeline": "ainda n sei",
+    "monitoring_tools": "ainda n sei",
+    "rollback_strategy": "ainda n sei"
+  },
+  "phase6": {
+    "monitoring_metrics": "ainda n sei",
+    "alert_strategy": "ainda n sei",
+    "backup_strategy": "é com que seja em nuvem para que qualquer tipo de erro em hardware local n influencie ou atrapalhe no andamento do software",
+    "cost_optimization": "deve diminuir o max de custo desde que n influencia no declinio das metricas que englobam os adjtivos:eficiencia,interpretabilidade, generalista e adaptavel ao problema em especifico",
+    "support_process": "n sei ainda"
+  }
+}

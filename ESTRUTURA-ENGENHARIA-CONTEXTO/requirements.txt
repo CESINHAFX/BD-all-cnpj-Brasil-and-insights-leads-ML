@@ -1,0 +1,30 @@
+# Requirements for ESTRUTURA-ENGENHARIA-CONTEXTO
+# Context Engineering and Documentation Project
+
+# Core dependencies for documentation processing
+markdown>=3.4.0
+pyyaml>=6.0
+
+# PDF processing for /docs directory
+PyPDF2>=3.0.0
+pdfplumber>=0.10.0
+
+# Video transcription for /videos directory
+youtube-transcript-api>=0.6.0
+
+# Web scraping for /urls directory
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+html2text>=2020.1.16
+
+# Code analysis and documentation
+autopep8>=2.0.0
+pylint>=3.0.0
+black>=23.0.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Utilities
+python-dotenv>=1.0.0

@@ -1,0 +1,135 @@
+/project-root
+   ├── index.md             # página inicial do site
+   ├── languages.md         # lista de linguagens/frameworks usados
+   ├── /docs                # PDFs oficiais (ex.: Microsoft)
+   │     ├── guia_api.pdf
+   │     ├── arquitetura.pdf
+   │     └── README.md      # links e explicações para os PDFs
+   ├── /videos              # transcrições de vídeos convertidos em texto
+   │     ├── transcript_video1.md
+   │     ├── transcript_video2.md
+   │     └── README.md      # índice dos vídeos
+   ├── /urls                # URLs convertidas em texto
+   │     ├── artigo_blog1.md
+   │     ├── tutorial_site.md
+   │     └── README.md      # índice dos artigos
+   ├── /code                # código-fonte com docstrings ricas
+   │     ├── main.py
+   │     ├── utils.py
+   │     └── README.md      # explicação da pasta de código
+   └── /guides              # arquivos .md explicativos por pasta
+         ├── backend.md
+         ├── data.md
+         ├── ml_pipeline.md
+         └── README.md     # índice dos guias
+         └──SDLC.md
+
+===============================================================================
+REGRAS DE ENGENHARIA DE CONTEXTO DO GITHUB COPILOT
+===============================================================================
+
+Cada etapa do projeto exige uma customização específica do agente Copilot.
+Os parâmetros devem ser ajustados conforme a natureza da tarefa:
+
+PARÂMETROS DE CONFIGURAÇÃO POR TIPO DE TAREFA:
+────────────────────────────────────────────────────────────────────────────
+
+1. TAREFAS CRIATIVAS (Design, Arquitetura, Brainstorming)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   • Top-k: 50-100 (maior diversidade de tokens)
+   • Top-p: 0.9-0.95 (nucleus sampling amplo)
+   • Temperature: 0.7-0.9 (maior criatividade)
+   • Token budget: 4000-8000 (contexto extenso)
+   • One-shot: Exemplos variados e abstratos
+   • Aplicável em: /guides, index.md, arquitetura inicial
+
+2. TAREFAS DE INTERPRETAÇÃO LITERAL (Código, APIs, Refatoração)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   • Top-k: 1-10 (baixa diversidade, maior precisão)
+   • Top-p: 0.1-0.3 (nucleus sampling restrito)
+   • Temperature: 0.1-0.3 (baixa aleatoriedade)
+   • Token budget: 2000-4000 (contexto focado)
+   • One-shot: Exemplos precisos e específicos
+   • Aplicável em: /code, implementações de API, bug fixes
+
+3. TAREFAS DE DOCUMENTAÇÃO (README, Comentários, Tutoriais)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   • Top-k: 20-40 (moderada diversidade)
+   • Top-p: 0.5-0.7 (nucleus sampling equilibrado)
+   • Temperature: 0.4-0.6 (criatividade moderada)
+   • Token budget: 3000-6000 (contexto médio)
+   • One-shot: Exemplos de documentação bem estruturada
+   • Aplicável em: README.md, /docs, comentários de código
+
+4. TAREFAS DE TESTE (Unit Tests, Integration Tests)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   • Top-k: 10-30 (diversidade controlada)
+   • Top-p: 0.3-0.5 (nucleus sampling moderado-baixo)
+   • Temperature: 0.2-0.4 (baixa aleatoriedade)
+   • Token budget: 2500-5000 (contexto para casos de teste)
+   • One-shot: Exemplos de testes existentes
+   • Aplicável em: arquivos de teste, validações
+
+5. TAREFAS DE ANÁLISE E TRANSCRIÇÃO (Vídeos, URLs, PDFs)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   • Top-k: 15-35 (diversidade moderada)
+   • Top-p: 0.4-0.6 (nucleus sampling equilibrado)
+   • Temperature: 0.3-0.5 (criatividade controlada)
+   • Token budget: 5000-10000 (contexto extenso para análise)
+   • One-shot: Exemplos de transcrições/análises anteriores
+   • Aplicável em: /videos, /urls, conversão de conteúdo
+
+MELHORES PRÁTICAS DE CONTEXTO:
+────────────────────────────────────────────────────────────────────────────
+
+✓ ESPECIFICIDADE: Prompts claros, concisos e bem delimitados
+✓ CONTEXTO RICO: Fornecer exemplos do repositório e código relacionado
+✓ ESCOPO DEFINIDO: Tarefas bem delimitadas com critérios de aceitação
+✓ EXEMPLOS: Incluir one-shot/few-shot samples quando possível
+✓ ITERAÇÃO: Usar PR comments para refinamento progressivo
+✓ REVISÃO: Sempre revisar outputs do Copilot antes de merge
+
+TABELA RESUMO - INFLUENCIANDO PERFORMANCE DO COPILOT:
+────────────────────────────────────────────────────────────────────────────
+
+| Fator            | Ação                                | Efeito                          |
+|------------------|-------------------------------------|---------------------------------|
+| Contexto         | Fornecer contexto rico do repo      | Aumenta relevância e qualidade  |
+| Especificidade   | Ser conciso e explícito             | Reduz ambiguidade, melhora precisão |
+| Exemplos         | Usar one-shot/few-shot samples      | Guia modelo para padrões        |
+| Seleção Tarefa   | Escolher tarefas bem delimitadas    | Aproveita pontos fortes         |
+| Revisão          | Usar PR comments e sugestões        | Permite refinamento iterativo   |
+| Configuração     | Manter codebase limpo e estilo claro| Melhora consistência            |
+
+DIRETRIZES POR PASTA DO PROJETO:
+────────────────────────────────────────────────────────────────────────────
+
+/docs (PDFs, Documentação Oficial):
+  → Parâmetros: Documentação (top-k: 20-40, temp: 0.4-0.6)
+  → Foco: Clareza, precisão técnica, formatação consistente
+
+/videos (Transcrições):
+  → Parâmetros: Análise/Transcrição (top-k: 15-35, temp: 0.3-0.5)
+  → Foco: Fidelidade ao conteúdo, estruturação clara
+
+/urls (Artigos, Tutoriais):
+  → Parâmetros: Análise/Transcrição (top-k: 15-35, temp: 0.3-0.5)
+  → Foco: Síntese de informação, manutenção de contexto
+
+/code (Código-fonte):
+  → Parâmetros: Interpretação Literal (top-k: 1-10, temp: 0.1-0.3)
+  → Foco: Precisão, testes, docstrings ricas, padrões de código
+
+/guides (Guias Explicativos):
+  → Parâmetros: Criativo/Documentação (top-k: 30-50, temp: 0.5-0.7)
+  → Foco: Clareza pedagógica, exemplos práticos, estrutura lógica
+
+REFERÊNCIAS:
+────────────────────────────────────────────────────────────────────────────
+• GitHub Copilot Best Practices:
+  https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/coding-agent/get-the-best-results
+
+• GitHub Copilot Coding Agent Concepts:
+  https://docs.github.com/en/copilot/concepts/agents/coding-agent
+
+===============================================================================
