@@ -1,0 +1,37 @@
+classDiagram
+  class CNAE {
+    code : CharField
+    description : TextField
+  }
+  class Company {
+    address : TextField
+    capital_social : DecimalField
+    city : CharField
+    cnae_main : ForeignKey
+    cnae_secondary : ManyToManyField
+    cnpj : CharField
+    created_at : DateTimeField
+    date_opened : DateField
+    email : EmailField
+    legal_name : CharField
+    legal_nature_code : CharField
+    phone_number : CharField
+    registration_status : CharField
+    state : CharField
+    trade_name : CharField
+    updated_at : DateTimeField
+    website : URLField
+    zip_code : CharField
+  }
+
+  class Partner {
+    Classification_choices : list
+    company : ForeignKey
+    created_at : DateTimeField
+    name : CharField
+    qualification_code : CharField
+    updated_at : DateTimeField
+  }
+Company "0..*" -- "0..*" CNAE : cnae_secondary
+Company "1" -- "0..*" Partner : company
+Company "0..*" -- "0..1" CNAE : cnae_main
