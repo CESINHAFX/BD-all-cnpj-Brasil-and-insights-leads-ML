@@ -1,31 +1,29 @@
-from django.test import TestCase
-from django.test import TestCase
-import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")  # Substitua "myproject" pelo nome do seu projeto Django
-from core.models import CNAE
-from django.core.wsgi import get_wsgi_application
-# Substitua "some_module" pelo módulo correto que você deseja importar
+import zipfile
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
 from django.core.management import call_command
+from django.test import TestCase, override_settings
 
-#bibliotecas e frameworks utilizado no material
-# Create your tests here.
-#testar a importação de CNAE
-def clean_data():
-    try:
-        CNAE.objects.all().delete()
-    except Exception as e:
-        print(f"Erro ao limpar os dados: {e}")
-def ImportCnaeTestCase(TestCase):
-    try:
-        clean_data()
-        call_command('import_cnae')#como faz para ler somente as 5 primeiras linhas?
-        cnaes = CNAE.objects.filter(code='0111301',description="Cultivo de arroz")
-        print(f"Registros encontrados: {cnaes.count()}")
-        self.assertTrue(cnaes.exists())
-    except Exception as e:
-        print(f"Erro ao limpar os dados antes do teste: {e}")
+from core.models import CNAE
 
 
+class ImportCnaeTestCase(TestCase):
+    def test_import_cnae(self):
+        with TemporaryDirectory() as temp_root:
+            archive_path = Path(temp_root) / "data" / "cnpj" / "2026-01" / "Cnaes.zip"
+            archive_path.parent.mkdir(parents=True)
+            conteudo = (
+                "1231234;cultivo de açai\n"
+                "1234567;cultivo trigo\n"
+                "7894561;cultivo cana;combustivel\n"
+            )
+            with zipfile.ZipFile(archive_path, "w") as zipf:
+                zipf.writestr("Cnaes.csv", conteudo.encode("latin-1"))
 
+            with override_settings(BASE_DIR=Path(temp_root)):
+                call_command("import_cnae")
 
-
+        self.assertTrue(CNAE.objects.filter(code="1231234", description="cultivo de açai").exists())
+        self.assertTrue(CNAE.objects.filter(code="1234567", description="cultivo trigo").exists())
+        self.assertFalse(CNAE.objects.filter(code="7894561").exists())
