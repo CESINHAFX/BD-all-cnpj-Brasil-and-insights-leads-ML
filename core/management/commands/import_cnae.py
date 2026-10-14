@@ -28,6 +28,8 @@ class Command(BaseCommand):
                     for raw in reader:
                         if len(raw) != 2:
                             continue
+                        if len(raw[0]) != 7:
+                            continue
                         cnae_batch.append(CNAE(
                             code=raw[0],
                             description=raw[1],
@@ -46,5 +48,6 @@ class Command(BaseCommand):
                     ignore_conflicts=True,
                 )
         self.stdout.write(self.style.SUCCESS("CNAE import completed."))
+    
 
 
